@@ -9,6 +9,7 @@ Division B: https://contest.yandex.ru/contest/45468/problems/
 Final contest: https://contest.yandex.ru/contest/46304/problems/D/
 
 # Структура
+```bash
 ├── course
 │   ├── i - номер задачи
 │   │   ├── index.py - решение
@@ -19,3 +20,4 @@ Final contest: https://contest.yandex.ru/contest/46304/problems/D/
 │   │       ├── ...
 │   │       ├── answers - ответы
 │   │       └── index.py - магия
+```
