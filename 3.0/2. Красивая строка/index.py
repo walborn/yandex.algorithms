@@ -1,6 +1,5 @@
-
 from tests.index import test, input
-test(2)
+test(0)
 
 K, S = int(input()) + 1, input()
 n, s, r = len(S), S + '.', 0
