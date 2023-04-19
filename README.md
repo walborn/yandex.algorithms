@@ -1,11 +1,13 @@
 # Intro
-Здесь описано, как читать данные
+О том, как работать с системой яндекс контестов
 
 # 3.0
 https://yandex.ru/yaintern/algorithm-training
 
 Division A: https://contest.yandex.ru/contest/45469/problems/
+
 Division B: https://contest.yandex.ru/contest/45468/problems/
+
 Final contest: https://contest.yandex.ru/contest/46304/problems/D/
 
 # Структура
