@@ -1,0 +1,16 @@
+11 3 10
+(image width=10 layout=embedded height=2)
+(image width=10 layout=embedded height=2)
+(image width=10 layout=embedded height=3)
+(image width=10 layout=embedded height=4)
+(image width=10 layout=embedded height=2)
+(image width=10 layout=surrounded height=4)
+(image width=10 layout=embedded height=2)
+
+(image width=10 layout=embedded height=3)
+
+(image width=10 layout=embedded height=4)
+
+(image width=10 layout=surrounded height=2)
+
+(image width=10 layout=surrounded height=2)

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Почта с тегами</title>
+  <meta charset='utf-8'>
+  <style>
+    .Page {
+      font-family: Arial;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      color: #2f2d33;
+    }
+
+    .Logo {
+      font-size: 24px;
+      padding: 12px;
+      margin: 0;
+    }
+
+    .Main {
+      display: flex;
+    }
+
+    .Tags {
+      width: 25%;
+      background-color: #fffae5;
+      padding: 6px;
+    }
+
+    .Tags_dropzone {
+      background-color: #ffedba;
+    }
+
+    .Tags_dragovered {
+      background-color: #ffd98e;
+    }
+
+    .Tags_dragovered * {
+      pointer-events: none;
+    }
+
+    .Tag {
+      background-color: #ffc062;
+      color: #592400;
+      margin: 6px;
+      padding: 6px;
+      display: inline-block;
+    }
+
+    .Tag_dragged {
+      background-color: #ff9100;
+    }
+
+    .Tag_removed {
+      display: none;
+    }
+
+    .Letters {
+      width: 100%;
+      background-color: #91cfff;
+    }
+
+    .Letters_dropzone {
+      background-color: #4da0ff;
+    }
+
+    .Letter {
+      display: flex;
+      color: #00244d;
+    }
+
+    .Letter_dragovered {
+      background-color: #006fed;
+    }
+
+    .Letter_dragovered * {
+      pointer-events: none;
+    }
+
+    .Letter__Title {
+      margin: 12px;
+    }
+  </style>
+</head>
+
+<body class='Page'>
+  <script>
+    let data = window.data || {
+      tags: {
+        '1': 'важное',
+        '2': 'личное',
+        '3': 'рабочее',
+        '4': 'Проект X',
+        '5': 'Проект Y'
+      },
+      letters: [
+        {
+          id: '1',
+          title: 'Приглашение на день рождения',
+          tags: ['1', '2']
+        },
+        {
+          id: '2',
+          title: 'Ответ на ваш комментарий',
+          tags: ['2']
+        },
+        {
+          id: '3',
+          title: 'Резюме последней встречи про X',
+          tags: ['3', '4']
+        },
+        {
+          id: '4',
+          title: 'Расчётный лист',
+          tags: ['1', '3']
+        },
+        {
+          id: '5',
+          title: 'Нужна помощь с Y',
+          tags: ['3', '5']
+        },
+        {
+          id: '6',
+          title: 'Регулярная рассылка для клиентов',
+          tags: []
+        }
+      ]
+    }
+
+    function mapAndJoin(a, f, s = '') { return a.map(f).join(s) }
+    function buildHtml(data) {
+      return `
+      <div class='Main'>
+        <div class='Tags'>
+          ${mapAndJoin(
+        Object.entries(data.tags),
+        ([id, title]) => buildTagHtml(id, title))}
+        </div>
+        <div class='Letters'>
+          ${mapAndJoin(
+          data.letters,
+          ({ id, title, tags }) => `
+              <div class='Letter' data-letter-id='${id}'>
+                <div class='Letter__Title'>${title}</div>
+                ${mapAndJoin(tags, (l) => buildTagHtml(l, data.tags[l]))}
+              </div>
+            `)}
+        </div>
+      </div>
+    `
+    }
+    function buildTagHtml(id, title) {
+      return `<div class='Tag' data-tag-id='${id}'>${title}</div>`
+    }
+    document.body.innerHTML = buildHtml(data);
+    window.onSolutionReady && window.onSolutionReady();
+
+    let parent = null
+    let letters = document.querySelectorAll('.Letter')
+    let lettersZone = document.querySelector('.Letters')
+    let tagsZone = document.querySelector('.Tags')
+
+    let dragged = null
+
+    document.addEventListener('dragstart', (event) => {
+      if (!event.target.classList.contains('Tag')) return
+      dragged = event.target
+      if (dragged.closest('.Letter')) tagsZone.classList.append('Tags_dropzone')
+    })
+
+    const targetTags = document.querySelector('.Tags')
+    tagsZone.addEventListener('dragover', (event) => {
+      // prevent default to allow drop
+      event.preventDefault()
+      event.target.classList.append('Tags_')
+    })
+
+    lettersZone.addEventListener('dragover', (event) => {
+      // prevent default to allow drop
+      event.preventDefault()
+      tagsZone.classList.add('Tags_dropzone')
+
+    })
+
+    target.addEventListener('drop', (event) => {
+      // prevent default action (open as link for some elements)
+      event.preventDefault();
+      // move dragged element to the selected drop target
+      if (event.target.className === 'dropzone') {
+        dragged.parentNode.removeChild(dragged);
+        event.target.appendChild(dragged);
+      }
+    });
+
+    // document.addEventListener('mousedown', (event) => {
+    //   if (!event.target.classList.contains('Tag')) return
+    //   const tag = event.target
+    //   const { tagId } = tag.dataset
+    //   const parent = tag.parentElement
+    //   const { letterId } = parent.dataset
+
+    //   const inheritedDisplay = tag.style.display
+    //   const inheritedZIndex = tag.style.zIndex
+    //   const inheritedPosition = tag.style.position
+
+    //   let prev = parent, next
+
+    //   // Тегу должен быть присвоен класс Tag_dragged — это позволит перетаскиваемому тегу иметь специальное отображение
+    //   tag.classList.add('Tag_dragged')
+
+    //   // Зоне писем должен быть присвоен класс Letters_dropzone — это позволит подсветить возможное назначение для перетаскивания
+    //   lettersZone.classList.add('Letters_dropzone')
+
+    //   // Если тег перетаскивается с письма, то дополнительно зоне тегов должен быть присвоен класс Tags_dropzone — это позволит подсветить ещё одно возможное назначение для перетаскивания.
+    //   if (letterId) tagsZone.classList.add('Tags_dropzone')
+
+    //   tag.style.position = 'absolute'
+    //   tag.style.zIndex = 100000
+
+    //   function moveAt(pageX, pageY) {
+    //     tag.style.left = `${pageX}px`
+    //     tag.style.top = `${pageY}px`
+    //     // tag.style.left = `${pageX - tag.offsetWidth / 2}px`
+    //     // tag.style.top = `${pageY - tag.offsetHeight / 2}px`
+    //   }
+
+    //   moveAt(event.pageX, event.pageY)
+
+    //   function onMouseMove(event) {
+    //     moveAt(event.pageX, event.pageY)
+
+    //     tag.style.display = 'none'
+    //     let elemBelow = document.elementFromPoint(event.clientX, event.clientY)
+    //     tag.style.display = inheritedDisplay
+
+    //     if (prev) prev.classList.remove('Tags_dragovered', 'Letter_dragovered')
+    //     if (!elemBelow) return
+
+
+    //     const zoneTags = elemBelow.closest('.Tags')
+    //     const zoneLetter = elemBelow.closest('.Letter')
+    //     // с письма на зону тэгов
+    //     if (letterId && zoneTags) zoneTags.classList.add('Tags_dragovered')
+
+    //     // с письма или с зоны тэгов на письмо
+    //     if (zoneLetter) {
+    //       const letterTo = data.letters.find(i => i.id === zoneLetter.dataset.letterId)
+    //       if (!letterTo.tags.includes(tagId)) zoneLetter.classList.add('Letter_dragovered')
+    //     }
+     
+    //     prev = zoneTags || zoneLetter
+    //   }
+
+      // document.addEventListener('mousemove', onMouseMove)
+
+      // tag.onmouseup = function (event) {
+      //   document.removeEventListener('mousemove', onMouseMove)
+      //   tag.classList.remove('Tag_dragged')
+      //   tagsZone.classList.remove('Tags_dropzone', 'Tags_dragovered')
+      //   lettersZone.classList.remove('Letters_dropzone')
+      //   if (prev) prev.classList.remove('Letter_dragovered')
+
+      //   // ;[...letters].forEach(letter => letter.classList.remove('Letter_dragovered'))
+
+      //   // При броске тега на письмо, на котором данный тег отсутствует, он должен быть на него проставлен. При этом новый тег должен оказаться после всех существующих. Если тег перетаскивался с другого письма, то он должен исчезнуть с исходного.
+        
+      //   // возвратим изначальные стили
+      //   tag.style.position = inheritedPosition
+      //   tag.style.zIndex = inheritedZIndex
+
+      //   if (prev) {
+      //     // из письма на письмо, у которого нет еще такого тэга
+      //     if (letterId && prev.dataset.letterId) {
+      //       const letterTo = data.letters.find(({ id }) => id === prev.dataset.letterId)
+      //       if (!letterTo.tags.includes(tagId)) {
+      //         const letterFrom = data.letters.find(({ id }) => id === letterId)
+      //         letterFrom.tags = letterFrom.tags.filter(t => t !== tagId)
+      //         letterTo.tags.push(tagId)
+
+      //         prev.append(tag)
+      //       } 
+      //     }
+      //     // из области тэгов на письмо, у которого нет еще такого тэга
+      //     if (!letterId && prev.dataset.letterId) {
+      //       const letterTo = data.letters.find(({ id }) => id === prev.dataset.letterId)
+      //       if (!letterTo.tags.includes(tagId)) {
+      //         // бросаем копию, так как в облаке тэгов он должен остаться
+      //         prev.append(tag.cloneNode(true))
+      //         letterTo.tags.push(tagId)
+      //       } 
+      //     }
+      //     // из письма в область тэгов
+      //     if (letterId && !prev.dataset.letterId) {
+      //       parent.removeChild(tag)
+      //       const letterFrom = data.letters.find(({ id }) => id === letterId)
+      //       letterFrom.tags = letterFrom.tags.filter(t => t !== tagId)
+      //     }
+      //   } else {
+      //     // из письма или область тэгов вникуда, то ничего не делаем
+      //   }
+      // }
+      // tag.ondragstart = () => false // отключение нативного днд
+    })
+  </script>
+</body>
+
+</html>

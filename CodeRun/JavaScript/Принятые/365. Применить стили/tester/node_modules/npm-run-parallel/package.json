@@ -1,0 +1,55 @@
+{
+  "name": "npm-run-parallel",
+  "version": "0.6.0",
+  "description": "Run npm tasks in parallel and exit when they are all done.",
+  "bin": "index.js",
+  "scripts": {
+    "build": "babel $npm_package_config_source_dir -d $npm_package_config_output_dir",
+    "lint": "npm run lint:eslint",
+    "lint:fix": "npm run lint:eslint:fix",
+    "lint:eslint": "eslint $npm_package_config_source_dir",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "prepare": "npm run build",
+    "start": "node $npm_package_main",
+    "test": "mocha --compilers js:babel-register $npm_package_config_tests --require $npm_package_config_test_helpers",
+    "test:watch": "npm test -- --watch",
+    "watch": "npm run build -- --watch",
+    "__test_fixture__": "echo",
+    "__test_fixture_2__": "echo"
+  },
+  "config": {
+    "source_dir": "lib",
+    "tests": "test/*.js",
+    "test_helpers": "test-helpers/*.js",
+    "output_dir": "dist"
+  },
+  "keywords": [
+    "npm",
+    "run",
+    "script",
+    "scripts",
+    "task",
+    "tasks",
+    "parallel",
+    "stream",
+    "concurrent"
+  ],
+  "author": "Ian McNally <ianmcnally@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "meow": "^3.7.0",
+    "rx": "^4.0.8",
+    "rx-node": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "chai": "^3.5.0",
+    "eslint": "^2.2.0",
+    "execa": "^0.2.2",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
+  }
+}

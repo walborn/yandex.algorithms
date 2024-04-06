@@ -1,0 +1,18 @@
+21 1 1
+(image width=13 height=2 layout=embedded)
+(image width=2 height=2 layout=surrounded)
+(image width=4 height=2 layout=embedded)
+
+(image width=3 height=2 layout=surrounded)
+(image width=12 height=2 layout=embedded)
+(image width=4 height=2 layout=surrounded)
+
+(image width=1 height=4 layout=embedded)
+(image width=1 height=4 layout=surrounded)
+(image width=1 height=4 layout=surrounded)
+. ?
+(image width=1 height=4 layout=surrounded)
+(image width=1 height=4 layout=embedded)
+(image width=1 height=4 layout=embedded)
+!
+(image width=1 height=4 layout=embedded)
