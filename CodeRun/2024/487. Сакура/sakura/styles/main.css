@@ -1,0 +1,31 @@
+.canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+
+  position: absolute;
+  top: var(--spacing-4);
+  left: var(--spacing-4);
+  border-radius: var(--spacing-4);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: var(--spacing-4);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-font-size);
+}
+
+.control__range {
+  flex-grow: 1;
+}

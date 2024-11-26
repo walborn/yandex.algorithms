@@ -28,8 +28,9 @@ module.exports = {getLastCommonCommitMessage};
 
 last commit example
 
-Примеры
-Пример 1:
+## Примеры
+
+### Пример 1:
 ```js
 getLastCommonCommitMessage([
 {

@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "365e4baa70af9698",
+    "type": "split",
+    "children": [
+      {
+        "id": "1d10a939e72303cf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "08c80b751e07af76",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "6/3. Стеки, очереди, деки/J. Кровать из стульев/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "66215f58ba18aa45",
+    "type": "split",
+    "children": [
+      {
+        "id": "dc6bd1e2f17517b3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1eadcddacaff8543",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3565ed235849bae2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "383eaba3c6e0e6e8",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "848ac9a28340db5d",
+    "type": "split",
+    "children": [
+      {
+        "id": "1eb97001cd2c0d93",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "392bc61d17f6901c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "6/1. Тестирование/C. Надпись на табло/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for index"
+            }
+          },
+          {
+            "id": "3459af05a57c53c9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "6/1. Тестирование/C. Надпись на табло/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from index"
+            }
+          },
+          {
+            "id": "b4233e10e40c1204",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "64539f8383117e16",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "6/1. Тестирование/C. Надпись на табло/index.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "1eadcddacaff8543",
+  "lastOpenFiles": [
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/tests/answers/9",
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/tests/9",
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/indexBigint.js",
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/index copy.js",
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/tests/answers/5",
+    "6/3. Стеки, очереди, деки/J. Кровать из стульев/tests/5",
+    "6/3. Стеки, очереди, деки/I. Автоматизированный склад/index.md",
+    "6/3. Стеки, очереди, деки/H. Стек с суммой/index.md",
+    "6/3. Стеки, очереди, деки/G. Очередь в ПВЗ/index.md",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/index.md",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/tests/0",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/tests/1 copy",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/tests/answers/3",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/tests/answers/2 copy",
+    "6/3. Стеки, очереди, деки/F. Минимальная ПСП/tests/3",
+    "6/3. Стеки, очереди, деки/E. Значение арифметического выражения/index.md",
+    "6/3. Стеки, очереди, деки/D. Постфиксная запись/index.md",
+    "6/3. Стеки, очереди, деки/C. Минимум на отрезке/index.md",
+    "6/3. Стеки, очереди, деки/B. Великое Лайнландское переселение/index.md",
+    "6/3. Стеки, очереди, деки/A. Правильная скобочная последовательность/index.md",
+    "6/2. Префиксные суммы и два указателя/J. Исследование улик*/index.md",
+    "6/2. Префиксные суммы и два указателя/I. Изучение алгоритмов*/index.md",
+    "6/2. Префиксные суммы и два указателя/H. Переезд в опенспейс*/index.md",
+    "6/2. Префиксные суммы и два указателя/B. Сумма номеров/index.md",
+    "6/2. Префиксные суммы и два указателя/G. Цензурное произведение copy/G. Цензурное произведение/index.md",
+    "6/2. Префиксные суммы и два указателя/C. Город Че/index.md",
+    "6/2. Префиксные суммы и два указателя/A. Префиксные суммы/index.md",
+    "6/2. Префиксные суммы и два указателя/G. Цензурное произведение/index.md",
+    "6/2. Префиксные суммы и два указателя/F. Сумма тройных произведений/index.md",
+    "6/2. Префиксные суммы и два указателя/F. Сумма тройных произведений copy/index.md",
+    "6/2. Префиксные суммы и два указателя/E. Удаление медиан/index.md",
+    "6/2. Префиксные суммы и два указателя/E. Удаление медиан copy/index.md",
+    "6/2. Префиксные суммы и два указателя/D. Лучший отдых/index.md",
+    "6/2. Префиксные суммы и два указателя/D. Лучший отдых copy/index.md",
+    "6/2. Префиксные суммы и два указателя/A. Плот/index.md",
+    "6/1. Тестирование/C. Надпись на табло/index.md"
+  ]
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="KirillDyachkovskiy" />
+  <title>Fractal Tree</title>
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body>
+  <div class='sky'></div>
+  <div class='moon'>
+    <div class='crater1'></div>
+    <div class='crater2'></div>
+    <div class='crater3'></div>
+  </div>
+  <div class="hill1"></div>
+  <div class="hill2"></div>
+  <canvas class="canvas" id="fractalTree" width="1024" height="768"></canvas>
+  <div class="controls">
+    <label class="control">
+      <span>Length:</span>
+      <input class="control__range" id="lengthInput" type="range" min="50" max="150" value="550" />
+    </label>
+    <label class="control">
+      <span>Angle:</span>
+      <input class="control__range" id="angleInput" type="range" min="0" max="60" value="15" />
+    </label>
+    <label class="control">
+      <span>Depth:</span>
+      <input class="control__range" id="depthInput" type="range" min="0.5" max="0.8" step="0.05" value="0.8" />
+    </label>
+  </div>
+  <script src="computing.js"></script>
+  <script src="drawTree.js"></script>
+  <script src="main.js"></script>
+  <script>
+    const sky = document.querySelector('.sky');
+
+    const { height: skyHeight, width: skyWidth } = sky.getBoundingClientRect();
+    const numberOfStars = (skyWidth * skyHeight) / 10000;
+
+    for (let i = 0; i < numberOfStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+
+      const starSize = Math.floor((Math.random() * 8) + 2);
+      star.style.height = `${starSize}px`;
+      star.style.width = `${starSize}px`;
+
+      const starTop = Math.floor(Math.random() * skyHeight);
+      star.style.top = `${starTop}px`;
+
+      const starLeft = Math.floor(Math.random() * skyWidth);
+      star.style.left = `${starLeft}px`;
+
+      sky.appendChild(star);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+@import url("background.css");
+@import url("main.css");
+
+:root {
+  --color-brand-dark: #15294e;
+  --color-brand-dark-200: #0f1e3a;
+  --color-brand-green: #00b341;
+  --color-salad: #a8db10;
+  --color-salad-50: #a8db1044;
+  --color-white: #fff;
+  --color-yellow: #ffb800;
+  --color-yellow-50: #ffb80044;
+
+  --text-font-size: 18px;
+  --text-color: var(--color-white);
+
+  --spacing-2: 8px;
+  --spacing-4: 16px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(to bottom, var(--color-brand-dark-200), var(--color-brand-dark));
+  color: var(--text-color);
+}
