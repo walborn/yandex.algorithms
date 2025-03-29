@@ -1,16 +1,12 @@
-const fs = require('fs')
-const test = 2
-const __input__ = fs.readFileSync(`${__dirname}/tests/${test}`, 'utf8').split('\n')
-const __ans__ = fs.readFileSync(`${__dirname}/tests/answers/${test}`, 'utf8')
-const input = ((i = 0) => () => __input__[i++])()
+const test = 1
 
-// COPY FROM HERE and uncomment this
-/*
 const fs = require('fs')
-const __input__ = fs.readFileSync('input.txt', 'utf8').split('\n')
-const input = ((i = 0) => () => __input__[i++])()
+let _
+try { _ = fs.readFileSync('input.txt', 'utf8').split('\n') }
+catch (e) { _ = fs.readFileSync(`${__dirname}/tests/${test}` , 'utf8').split('\n')}
+const input = ((i = 0) => () => _[i++])()
 
-//*/
+// code here
 
 class BinaryTree {
   constructor() {
@@ -48,9 +44,9 @@ class BinaryTree {
   print(node = this.root, depth = 0) {
     let ans = ''
     const [ left, right ] = this.tree[node]
-    if (left) ans += `${this.print(left, depth + 1)}`
+    if (left) ans += `${this.print(this.tree[node][0], depth + 1)}`
     ans += `${'.'.repeat(depth)}${node}\n`
-    if (right) ans += `${this.print(right, depth + 1)}`
+    if (right) ans += `${this.print(this.tree[node][1], depth + 1)}`
     return ans
   }
 }
@@ -68,13 +64,10 @@ while (request = input()) {
       ans.push(binaryTree.has(+value) ? 'YES' : 'NO')
       break
     case 'PRINTTREE':
-      ans.push(binaryTree.print())
+      ans.push(binaryTree.print().slice(0, -1))
       break
   }
 }
-console.log(binaryTree.tree)
-console.log(ans.join('\n'))
 
-/*
-fs.writeFileSync('output.txt', ans.join('\n'))
-*/
+console.log(ans.join('\n'))
+// fs.writeFileSync('output.txt', ans.join('\n'))
