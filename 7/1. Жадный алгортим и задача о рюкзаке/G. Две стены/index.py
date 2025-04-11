@@ -1,5 +1,8 @@
+# нужно выбирать PyPy иначе не проходит по времени
 from tests.index import test, input
-test(1)
+test(17)
+import time
+start = time.time()
 
 n, k = map(int, input().split())
 rows = [[] for _ in range(k)]
@@ -13,7 +16,7 @@ for i in range(1, n + 1):
 m = sum([ w for w, i in rows[0] ])
 a = [True] * (m + 1)
 
-d = []
+d, c = [], m - 1
 for row in rows:
   b = [0] + [-1] * m
   for w, i in row:
@@ -21,7 +24,12 @@ for row in rows:
       if b[j] != -1 and b[j + w] == -1:
         b[j + w] = i
   
-  a = [i and j != -1 for i, j in zip(a, b)]
+  for i in range(1, m):
+    if a[i] and b[i] == -1:
+      a[i] = False
+      c -= 1
+  
+  if not c: break   
   d.append(b)
 
 try:
@@ -37,3 +45,5 @@ try:
   print(*ans)
 except ValueError:
   print('NO')
+  
+print("--- %s seconds ---" % (time.time() - start))
