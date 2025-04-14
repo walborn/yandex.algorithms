@@ -1,9 +1,3 @@
-const fs = require('fs')
-const test = 1
-const __input__ = fs.readFileSync(`${__dirname}/tests/${test}`, 'utf8').split('\n')
-// const answer = fs.readFileSync(`${__dirname}/tests/answers/${test}`, 'utf8')
-
-const input = ((i = 0) => () => __input__[i++])()
 
 const generate = (n) => {
   const tasks = []
