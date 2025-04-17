@@ -1,30 +1,56 @@
-# нужно выбирать PyPy иначе не проходит по времени
 from tests.index import test, input
-test(4)
+test(1)
 
-n = int(input())
-
-odd, even = [], []
-
-for _ in range(n): 
-  s = input()
-  l = len(s)
+def partition(n):
+  dp = [[] for _ in range(n + 1)]
+  dp[0].append([])
   
-  a = sum(1 for i in range(0, l, 2) if s[i] == 'S')
-  b = sum(1 for i in range(1, l, 2) if s[i] == 'S')
+  for i in range(1, n + 1):
+    for j in range(1, i + 1):
+      for prev in dp[i - j]:
+        dp[i].append(prev + [j])
+  
+  return dp
 
-  if l % 2: odd.append((a, b))
-  else: even.append((a, b))
+  
+n, d = map(int, input().split())
+partitions = partition(n)
 
-ans = 0
-r = len(odd)
-if r:
-  ans = sum(max(a, b) for a, b in even)
-  odd.sort(key = lambda a: a[1] - a[0])
-  m = (r + 1) // 2
-  for i in range(m): ans += odd[i][0]
-  for i in range(m, r): ans += odd[i][1]
-else:
-  ans = sum(a for a, _ in even)
+for i in range(len(partitions)):
+  p = partitions[i]
+  for j in range(len(p)):
+    x = {}
+    for k in p[j]:
+      x[k] = x.get(k, 0) + 1
+    partitions[i][j] = x
+    
+# print(partitions)
+a = []
+for _ in range(n):
+  name, value = input().split()
+  a.append((int(value), name))
 
-print(ans)
+a.sort()
+a += [(10**9,)]
+
+
+c = {0: []}
+
+l = 0
+for row in range(1, n + 1):
+  
+  x = max(sum(sum([v for v, _ in c[i][-p[i]:]]) for i in p) for p in partitions[row - 1])
+  # print(x)
+  r = next(i for i in range(l, n + 1) if a[i][0] > d + x)
+  c[row] = [a[i] for i in range(l, r)]
+  if r == n: break
+  l = r
+  
+
+ans = [x for i in c for x in c[i]]
+  
+print(len(ans), sum([len(c[i])*i for i in c]))
+print(*sorted(map(lambda x: x[1], ans)), sep='\n')
+
+  
+  
