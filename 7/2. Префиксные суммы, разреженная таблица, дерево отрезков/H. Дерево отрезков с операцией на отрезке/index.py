@@ -1,34 +1,16 @@
 from tests.index import test, input
-test(3)
+test(1)
 
 from math import ceil, log2
 
 n = int(input())
 a = list(map(int, input().split()))
-b = a[:]
 m = int(input())
 
 k = ceil(log2(n))
-def op(x, y):
-  xlongest, xprefix, xsuffix, xonly0s = x
-  ylongest, yprefix, ysuffix, yonly0s = y
-  
-  longest = max(xlongest, ylongest, xsuffix + yprefix)
-  
-  prefix = xprefix
-  if xonly0s: prefix += yprefix
-  
-  suffix = ysuffix
-  if yonly0s: suffix += xsuffix
-  
-  
-  return (longest, prefix, suffix, xonly0s and yonly0s)
-  
-o = (0, 0, 0, False) # longest 0s,  prefix 0s, suffix 0s, only 0s
-def modify(x):
-  if x == 0: return (1, 1, 1, True)
-  return (0, 0, 0, False)
 
+def op(x, y): return [max(x[0], y[0]), 0]
+o = [0, 0]
 
 def build(a):
   t = [o] * 2**(k + 1)
@@ -36,42 +18,40 @@ def build(a):
   for i in range(2**k - 1, 0, -1): t[i] = op(t[2*i], t[2*i + 1])
   return t
 
-t = build([modify(i) for i in a])
+t = build([[i, 0] for i in a])
 
-def query(l, r, node = (1, 0, 2**k - 1)):
-  if l > r: return o
-
-  i, tl, tr = node
-  if l == tl and r == tr: return t[i]
-  m = (tl + tr) // 2
+def get(j, node = (1, 0, 2**k - 1)):
+  i, l, r = node
+  v, x = t[i]
+  t[i] = [v + x, 0]
+  if i >= 2**k: return t[i][0]
   
   i *= 2
-  return op(
-    query(l, min(m, r), (i, tl, m)),
-    query(max(l, m + 1), r, (i + 1, m + 1, tr))
-  )
-
-
-def update(i, x):
-  i += 2**k
-  if t[i][0] == int(x == 0): return
+  m = (l + r) // 2
+  t[i][1] += x
+  t[i + 1][1] += x
   
-  print(x + x, modify(x))
-  t[i] = modify(x)
-  print(t[i], x)
-  while i := i//2:
-    t[i] = op(t[2*i], t[2*i+1])
+  node = (i + 1, m + 1, r) if j > m else (i, l, m)
+  return get(j, node)
+
+def add(l, r, x, node = (1, 0, 2**k - 1)):
+  i, tl, tr = node
+  if l > r: return
+  if l == tl and r == tr:
+    t[i][1] += x
+  else:
+    m = (tl + tr) // 2
+    i *= 2
+    add(l, min(m, r), x, (i, tl, m))
+    add(max(l, m + 1), r, x, (i + 1, m + 1, tr))
 
 for _ in range(m):
-  typ, i, j = input().split()
+  inp = input()
   
-  if typ == 'QUERY':
-    l, r = int(i) - 1, int(j) - 1
-    print(query(l, r)[0])
-    print('brut', sum([int(i == 0) for i in b[l:r + 1]]))
-  else: # typ == 'UPDATE'
-    i, x = int(i) - 1, int(j)
-    update(i, x)
-    b[i] = x
-    print('check update', int(b[i] == 0) == t[2**k + i][0], i, b[i], t[2**k + i])
+  if inp[0] == 'g': # get
+    i = int(inp[2:]) - 1
+    print(get(i))
+  else: # add
+    l, r, x = map(int, inp[2:].split()) 
+    add(l - 1, r - 1, x)
     

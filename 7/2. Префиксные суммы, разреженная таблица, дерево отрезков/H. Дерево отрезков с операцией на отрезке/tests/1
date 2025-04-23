@@ -1,8 +1,8 @@
 5
-328 23 0 0 0
+2 4 3 5 2
 5
-QUERY 1 2
-UPDATE 2 832
-QUERY 3 3
-QUERY 2 3
-UPDATE 2 0
+g 2
+g 5
+a 1 3 10
+g 2
+g 4
