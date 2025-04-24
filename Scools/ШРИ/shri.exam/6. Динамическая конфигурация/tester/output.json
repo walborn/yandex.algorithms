@@ -1,0 +1,92 @@
+{
+  "objectFirst": {
+    "key": "first:key",
+    "key2": "first:key2",
+    "key3": 10,
+    "key4": {
+      "innerKey": "innerKey",
+      "innerObj": {
+        "test": 123,
+        "key": null,
+        "someOtherKey": []
+      }
+    },
+    "array": [
+      "first:array1",
+      "first:array2",
+      "first:array3",
+      {
+        "key": "first:array4"
+      }
+    ]
+  },
+  "object2First": {
+    "options": {
+      "key": "first:key",
+      "key2": "first:key2",
+      "key3": 10,
+      "key4": {
+        "innerKey": "innerKey",
+        "innerObj": {
+          "test": 123,
+          "key": null,
+          "someOtherKey": []
+        }
+      },
+      "array": [
+        "first:array1",
+        "first:array2",
+        "first:array3",
+        {
+          "key": "first:array4"
+        }
+      ]
+    },
+    "key": "first:object2key"
+  },
+  "objectSecond": {
+    "key": "first:key",
+    "key2": "first:key2",
+    "key3": 10,
+    "key4": {
+      "innerKey": "innerKey",
+      "innerObj": {
+        "test": 123,
+        "key": null,
+        "someOtherKey": []
+      }
+    },
+    "array": [
+      "first:array1",
+      "first:array2",
+      "first:array3",
+      {
+        "key": "first:array4"
+      }
+    ]
+  },
+  "object2Second": {
+    "options": {
+      "key": "first:key",
+      "key2": "first:key2",
+      "key3": 10,
+      "key4": {
+        "innerKey": "innerKey",
+        "innerObj": {
+          "test": 123,
+          "key": null,
+          "someOtherKey": []
+        }
+      },
+      "array": [
+        "first:array1",
+        "first:array2",
+        "first:array3",
+        {
+          "key": "first:array4"
+        }
+      ]
+    },
+    "key": "first:object2key"
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: darkgray;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #root {
+      width: 256px;
+      height: 256px;
+    }
+  </style>
+  <script src="./../index.js"></script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.root').innerHTML = solution(window.content)
+    });
+  </script>
+</head>
+
+<body>
+  <div class="root">
+
+  </div>
+</body>
+
+</html>
