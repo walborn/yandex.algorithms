@@ -37,97 +37,113 @@ export class SpeechController {
 }
 
 export class GameState {
-  constructor(storage) {}
-
-  becomeMainTab() {}
-  becomeSecondaryTab() {}
-  isMain() {
-    return false;
-  }
-
-  updateState(storage) {}
-}
-
-/*
-export class GameState {
   constructor(storage) {
     this.storage = storage
-    // Создаем Broadcast Channel
     this.channel = new BroadcastChannel('game_channel')
-    // Уникальный ID для вкладки (генерируется случайно)
     this.tabId = Math.random().toString(36).slice(2)
-    // Текущее состояние вкладки - secondary
-    this.isMain = false
-
+    this.isMaster = false
+    this.activeTabs = new Set() 
     this.broadcast('ping')
-
-    // Инициализация
-    this.init()
 
     // Обработка закрытия вкладки
-    window.addEventListener('beforeunload', this.onBeforeUnload)
+    window.addEventListener('beforeunload', this.handleBeforeUnload)
 
     // Слушаем сообщения из соседних вкладок
-    this.channel.onmessage(this.listen)
+    this.channel.onmessage = this.listen
   }
 
-  onBeforeUnload() {
-    if (this.isMain) this.broadcast('main_is_closed')
+  handleBeforeUnload = () => {
+    this.broadcast('unmount')
   }
 
-  broadcast(type) {
-    const tabId = this.tabId
-    const isMain = this.isMain
-    this.channel.postMessage({ type, tabId, isMain })
+  broadcast = (type, data = {}) => {
+    const self = { tabId: this.tabId, isMaster: this.isMaster }
+    this.channel.postMessage({ type, self, ...data })
   }
 
-  init() {
-    // Проверяем, есть ли другие вкладки
-    this.broadcast('ping')
-  
-    // Если через 100 мс нет ответа, текущая вкладка становится лидером
-    setTimeout(() => {
-      if (!this.isMain) {
-        this.isMain = true
-        broadcast('status')
-      }
-    }, 100)
-  
-    // Периодическая проверка активных вкладок
-    setInterval(() => this.broadcast('ping'), 5000)
+  becomeMainTab = () => {
+    this.isMaster = true
+    this.broadcast('request::master')
   }
 
-  becomeMainTab() {
-    this.broadcast('request_main')
-    this.isMain = true
-  }
-  becomeSecondaryTab() {
-    this.isMain = false
-  }
-  isMain() {
-    return this.isMain
+  becomeSecondaryTab = () => {
+    if (!this.isMaster) return
+
+    this.isMaster = false
+    this.broadcast('request::slave')
   }
 
-  updateState(storage) {
+  isMain = () => {
+    return this.isMaster
+  }
+
+  updateState = (storage) => {
     this.storage = storage
   }
 
-  listen(event) {
-    const { type, tabId: senderId, isMain: senderIsMain } = event.data
+  listen = (event) => {
+    const { type, self: that } = event.data
+
+    if (that.tabId === this.tabId) return
+
+    if (type === 'ping') {
+      this.activeTabs.add(that.tabId)
+      this.broadcast('status')
+      return
+    }
 
     if (type === 'status') {
-      // Когда мы главные и другая тоже заявляет, что она главная
-      if (this.isMain && senderIsMain && senderId !== this.tabId) {
-        // Например, вкладка с меньшим tabId становится лидером
-        this.isMain = this.tabId < senderId
+      this.activeTabs.add(that.tabId)
+      if (this.isMaster && that.isMaster) {
+        // Вкладка с меньшим tabId остаётся главной
+        if (this.tabId > that.tabId) {
+          this.isMaster = false
+          this.broadcast('status')
+        }
       }
-    } else if (type === 'request_main') {
-      this.isMain = senderId === this.tabId
-      broadcast('status')
-    } else if (type === 'ping') {
-      // Ответ на пинг для проверки активных вкладок
-      broadcast('status')
+      return
+    }
+
+    // Если другая вкладка запрашивает статус главной
+    if (type === 'request::master' && this.isMaster) {
+      this.isMaster = false
+      this.broadcast('status')
+      return
+    }
+
+    if (type === 'unmount') {
+      this.activeTabs.delete(that.tabId)
+      // выборы производим только если закрыли мастера
+      if (!that.isMaster) return
+
+      this.election()
+      return
+    }
+
+    if (type === 'request::slave' && !this.isMaster) {
+      this.election(that)
+      return
     }
   }
+
+  election = (that) => {
+    console.log('election')
+    // Главная вкладка закрылась, начинаем выбор новой
+    this.isMaster = false
+
+    // Пингуем всех
+    this.broadcast('ping')
+
+    // Ждём 200 мс, чтобы собрать ответы от других вкладок
+    setTimeout(() => {
+      // Если текущая вкладка имеет наименьший tabId среди активных
+      const minTabId = Math.min(...this.activeTabs)
+      for (let tabId of this.activeTabs) {
+        if (tabId === that.tabId) continue
+        if (tabId < this.tabId) return
+      }
+      console.log(this.tabId, 'become master')
+      this.becomeMainTab()
+    }, 200)
+  }
 }
-*/
