@@ -1,0 +1,78 @@
+<html lang="en" class=" ucdbben idc0_350">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Max Gap</title>
+  <style>
+    body {
+      font-size: 24px;
+    }
+
+    .cols {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .cols>div {
+      box-sizing: border-box;
+      width: 40px;
+      background-color: greenyellow;
+      border: 1px solid black;
+      text-align: center;
+    }
+  </style>
+  <script type="text/javascript">
+    const data = {
+      children: [580, 332, 527, 690, 220, 720, 148, 489, 950, 247, 68, 21, 831, 41, 459, 112, 842, 864, 186, 64]
+        .map(value => ({ dataset: { value } }))
+    }
+
+    function solution(block) {
+      let maxGap = 0
+      let values = {}
+      for (const i of block.children) values[i.dataset.value] = true
+
+      values = Object.keys(values).map(Number).sort((a, b) => a - b)
+      for (let i = 1; i < values.length; i++) {
+        maxGap = Math.max(maxGap, values[i] - values[i - 1])
+      }
+      return maxGap
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const block = document.querySelector('.cols')
+      const result = solution(block)
+      document.querySelector('#result').innerHTML = `Max gap = ${result}`
+    });
+  </script>
+  <style>
+    [_nghost-ng-c2697620354] {
+      font-family: Open Sans, sans-serif;
+      color: #121212
+    }
+  </style>
+</head>
+
+<body cz-shortcut-listen="true">
+  <div id="root">
+    <div class="cols">
+      <div data-value="20" style="height: 20px;" title="20">20</div>
+      <div data-value="150" style="height: 150px;" title="150">150</div>
+      <div data-value="60" style="height: 60px;" title="60">60</div>
+      <div data-value="40" style="height: 40px;" title="40">40</div>
+      <div data-value="80" style="height: 80px;" title="80">80</div>
+      <div data-value="120" style="height: 120px;" title="120">120</div>
+      <div data-value="100" style="height: 100px;" title="100">100</div>
+      <div data-value="50" style="height: 50px;" title="50">50</div>
+    </div>
+    <h2 id="result">Max gap = 0</h2>
+  </div>
+
+
+</body><app-ls-content ng-version="17.3.7"></app-ls-content>
+
+</html>

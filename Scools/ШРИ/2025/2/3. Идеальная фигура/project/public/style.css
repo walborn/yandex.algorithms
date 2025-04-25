@@ -1,0 +1,80 @@
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas {
+  border: var(--pixel-border) solid var(--accent-color);
+  background-color: var(--background-color);
+  image-rendering: pixelated;
+  border: 6px solid var(--background-invert);
+  box-shadow: var(--background-invert) 4px 4px 0px;
+}
+
+.controls-sidebar {
+  background-color: var(--sidebar-background-color);
+  padding: var(--indent-2xl) var(--indent-3xl);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--indent-xl);
+
+  & h2 {
+    margin-block-start: 0;
+  }
+}
+
+.theme-select {
+  margin-block-start: var(--indent-m);
+  padding: var(--indent-l);
+  font-family: "Press Start 2P";
+  color: var(--text-color);
+  background: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: var(--indent-l);
+  border: 6px solid var(--background-invert);
+  box-shadow: var(--background-invert) 4px 4px 0px;
+  border-radius: unset;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::select-fallback-button {
+  background: none;
+  font-family: "Press Start 2P";
+  font-size: var(--indent-l);
+  color: var(--text-color);
+}
+
+::picker(select) {
+  border: 6px solid var(--background-invert);
+  box-shadow: var(--background-invert) 4px 4px 0px;
+  background-color: var(--sidebar-background-color);
+}
+
+option {
+  font-family: "Press Start 2P";
+  padding: var(--indent-m) var(--indent-l);
+  font-size: var(--indent-l);
+  color: var(--text-color);
+}
+
+option:checked {
+  background: var(--accent-color);
+}
+
+option:hover,
+option:focus-visible {
+  background-color: var(--background-major);
+}
+
+.theme-select:hover,
+.theme-select:focus {
+  transform: scale(1.1);
+  outline: none;
+}

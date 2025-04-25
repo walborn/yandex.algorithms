@@ -1,0 +1,33 @@
+.tab-panel {
+  position: fixed;
+  top: var(--indent-l);
+  inset-inline-start: 0;
+  padding: var(--indent-s) var(--indent-l);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--indent-xl);
+
+  & button {
+    font-family: "Press Start 2P";
+    margin-bottom: var(--indent-s);
+    padding: var(--indent-s) var(--indent-m);
+    background: none;
+    color: var(--text-color);
+    border: 4px solid var(--background-invert);
+    box-shadow: var(--background-invert) 2px 2px 0px;
+    cursor: pointer;
+  }
+
+  & button:hover,
+  & button:focus {
+    transform: scale(1.1);
+    outline: none;
+  }
+
+  & .tab-status {
+    margin-block-start: var(--indent-m);
+    font-family: "Press Start 2P";
+    font-size: var(--indent-l);
+    color: var(--text-minor);
+  }
+}

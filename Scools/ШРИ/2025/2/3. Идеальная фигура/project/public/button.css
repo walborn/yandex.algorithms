@@ -1,0 +1,98 @@
+.control-button,
+.control-button-speech,
+.control-link-button {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  margin-block-start: var(--indent-m);
+  padding: var(--indent-l);
+  font-family: "Press Start 2P";
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: var(--indent-l);
+  border: 6px solid var(--background-invert);
+  box-shadow: var(--background-invert) 4px 4px 0px;
+  text-decoration: none;
+  background: none;
+  color: var(--text-color);
+}
+
+.control-button {
+  color: var(--textInvert);
+}
+
+.control-button-speech {
+  padding: 0;
+
+  &:before {
+    --size: 48px;
+    content: "";
+    background-image: url("/speech-icon.png");
+    background-size: var(--size) var(--size);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: var(--size);
+    height: var(--size);
+    margin-inline-end: var(--indent-l);
+  }
+}
+
+.control-button:hover,
+.control-button:focus,
+.control-button-speech:hover,
+.control-button-speech:focus,
+.control-link-button:hover,
+.control-link-button:focus,
+.color-button:hover,
+.color-button:focus,
+.color-button__selected,
+.control-link-button:hover,
+.control-link-button:focus {
+  transform: scale(1.1);
+  outline: none;
+}
+
+.control-button-speech__enabled {
+  &:before {
+    animation: drag 1s infinite;
+  }
+}
+
+@keyframes drag {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-15deg);
+  }
+}
+
+.control-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--indent-xl);
+}
+
+.colors-grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--indent-xl);
+}
+
+.color-button {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border: 4px solid var(--background-invert);
+  box-shadow: var(--background-invert) 2px 2px 0px;
+}
+
+.control-button-delete__hidden {
+  display: none;
+}
