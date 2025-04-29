@@ -2,7 +2,7 @@ from tests.index import test, input
 test(2)
 
 n, k = map(int, input().split())
-a = [0] * n
+a = [0] * (n + 1)
 
 # удаляем единицы младших разрядов
 # 101011 -> 101000
@@ -25,14 +25,17 @@ def query(i):
   res = 0
   while i > 0:
     res += t[i]
-    i -= i & -i
+    #i -= i & -i
+    i &= i + 1
+    i -= 1
 
   return res
 
 def update(i, x):
   while i <= n:
     t[i] += x
-    i += i & -i
+    # i += i & -i 
+    i |= i + 1
     
 for _ in range(k):
   typ, i, j = input().split()

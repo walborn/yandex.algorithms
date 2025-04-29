@@ -6,6 +6,6 @@ n = int(input())
 ans = 0
 while n:
   ans += 1
-  n &= n-1
+  n &= n-1 # равнозначно n -= n & -n
 
 print(ans)
