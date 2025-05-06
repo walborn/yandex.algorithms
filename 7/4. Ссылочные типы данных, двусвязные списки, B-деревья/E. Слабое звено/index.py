@@ -1,5 +1,5 @@
 from tests.index import test, input
-test(5)
+test(1)
 
 from time import time
 start = time()
